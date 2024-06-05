@@ -13,16 +13,6 @@ class ClassState extends React.Component {
     };
   }
 
-  // cada vez que se renderice el componente
-  // componentDidMount() {
-  //   console.log("componentDidMount");
-  // }
-
-  // solo se ejecuta la primera vez
-  // UNSAFE_componentWillMount() {
-  //   console.log("componentWillMount");
-  // }
-
   componentDidUpdate() {
     console.log("actualización");
 
@@ -49,17 +39,9 @@ class ClassState extends React.Component {
         {this.state.loading && <Loading />}
 
         <input placeholder="Código de seguridad" />
-        <button
-          onClick={() => this.setState({ loading: true })}
-          // onClick={() =>
-          //   this.setState((prevState) => ({ error: !prevState.error }))
-          // }
-        >
+        <button onClick={() => this.setState({ loading: true })}>
           Comprobar
         </button>
-        {/* <button onClick={() => this.setState({ error: !this.state.error })}>
-          Comprobar
-        </button> */}
       </div>
     );
   }
