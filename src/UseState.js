@@ -7,23 +7,38 @@ Utilización de Efectos para manejar el ciclo de vida */
 const SECURITY_CODE = "paradigma";
 
 function UseState({ name }) {
+  const [state, setState] = React.useState({
+    value: "",
+    error: false,
+    loading: false,
+  });
+
   const [value, setValue] = React.useState("");
   const [error, setError] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
-  console.log(value);
+  console.log(state.value);
 
   React.useEffect(() => {
     console.log("Empezando el efecto");
+    console.log(state);
 
-    if (loading) {
+    if (state.loading) {
       setTimeout(() => {
         console.log("Haciendo validación");
 
-        if (value !== SECURITY_CODE) {
-          setError(true);
+        if (state.value === SECURITY_CODE) {
+          setState({
+            ...state,
+            error: false,
+            loading: false,
+          });
         } else {
-          setError(false);
+          setState({
+            ...state,
+            error: true,
+            loading: false,
+          });
         }
 
         setLoading(false);
@@ -33,28 +48,32 @@ function UseState({ name }) {
     }
 
     console.log("Terminando el efecto");
-  }, [loading]);
+  }, [state.loading]);
 
   return (
     <div>
       <h2>Elminar {name}</h2>
       <p>Por favor, escribe el código de seguridad</p>
 
-      {error && !loading && <p>Error: el código es incorrecto.</p>}
-      {loading && <p>Cargando...</p>}
+      {state.error && !state.loading && <p>Error: el código es incorrecto.</p>}
+      {state.loading && <p>Cargando...</p>}
 
       <input
         placeholder="Código de seguridad"
-        value={value}
+        value={state.value}
         onChange={(event) => {
-          // setError(false); // funciona
-          setValue(event.target.value);
+          setState({
+            value: event.target.value,
+          });
         }}
       />
       <button
         onClick={() => {
-          // setError(false); // funciona
-          setLoading(true);
+          setState({
+            ...state,
+            loading: true,
+            error: false,
+          });
         }}
       >
         Comprobar
