@@ -22,6 +22,8 @@ function UseState({ name }) {
 
         if (value !== SECURITY_CODE) {
           setError(true);
+        } else {
+          setError(false);
         }
 
         setLoading(false);
