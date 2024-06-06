@@ -1,7 +1,7 @@
 import React from "react";
 
 /* Manejo básico del Estado en funciones utilizando 
-React Hooks, useState de forma individual y declarativa. 
+React Hooks, useState de forma semi-declarativa. 
 Utilización de Efectos para manejar el ciclo de vida */
 
 const SECURITY_CODE = "paradigma";
